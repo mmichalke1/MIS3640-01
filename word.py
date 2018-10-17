@@ -25,7 +25,6 @@ print('has no e')
 print(has_no_e('Babson'))
 print(has_no_e('College'))
 
-
 def avoids(word, forbidden):
     """
     takes a word and a string of forbidden letters, and that returns True
@@ -71,7 +70,16 @@ def uses_all(word, required):
 print('\nuses_all')
 print(uses_all('Babson', 'abs'))
 print(uses_all('college', 'abs'))
+fin = open('words.txt')
 
+def aeiouy(list):
+    trueList = []
+    for line in list:
+        word = line.strip()
+        if uses_all(word, "aeiouy"):
+            trueList.append(word)
+    return trueList
+print(len(aeiouy(fin)))
 
 def is_abecedarian(word):
     """
@@ -85,10 +93,29 @@ def is_abecedarian(word):
         last_letter = letter
     return True
 
+def list_abecedarian():
+    abc_words = []
+    sum = 0
+    total=0
+    current_longest = ""
+    list = open('words.txt')
+    for line in list:
+        total +=1
+        word = line.strip()
+        if is_abecedarian(word):
+            abc_words.append(word)
+            sum += 1
+            if len(word) > len(current_longest):
+                current_longest = word
+                print(current_longest)
+    print(current_longest)
+    return abc_words
+
+
 print('\nabecedarian')
 print(is_abecedarian('abs'))
 print(is_abecedarian('college'))
-
+print(max(list_abecedarian(), key=len))
 # Exercise 2
 a = 'apple'
 def is_abecedarian_recursion(word):
